@@ -1,0 +1,50 @@
+/*стиль для заголовка*/
+h1 {
+    color: black;
+}
+
+
+/*названия книг выведите жирным начертанием и установите размер шрифта 16px;*/
+.books {
+    font-weight: 700;
+    font-size: 16px;
+}
+
+
+/*email автора выведите в виде ссылки;*/
+.email {
+    background-color: black;
+}
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a:active {
+    text-decoration: underline;
+}
+
+
+/*добавьте отступ всей странице по горизонтали — 40px слева и справа;*/
+body {
+    margin: 40px; /* Убираем отступы */
+}
+
+/*добавьте отступы 20px между книгами.*/
+.bottom_indent {
+    padding-bottom: 20px;
+}
+
+
+/*нечётные абзацы выделите отдельным классом и добавьте им сероватый цвет фона (#dddddd);*/
+.grayBackground {
+    background-color: #dddddd;
+}

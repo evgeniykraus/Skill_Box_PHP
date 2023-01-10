@@ -1,0 +1,19 @@
+p {
+    background-color: #eeeeee;
+}
+
+#paragraph {
+    background-color: gray;
+}
+
+.red {
+    background-color: gray;
+}
+
+[data-color="blue"] {
+    background-color: gray;
+}
+
+.white {
+    background-color: black;
+}

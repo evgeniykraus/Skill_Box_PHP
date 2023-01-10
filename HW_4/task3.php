@@ -10,8 +10,8 @@ $result1 = [
     ]
 ];
 
-echo $result1['author']['name'] . ' написал книгу, которая называется ' . $result1['book']['title'] . PHP_EOL;
-echo $result1['author']['name'] . ' ждёт ваших отзывов, напишите ему на электронную почту ' . $result1['author']['email'] . PHP_EOL;
+echo "{$result1['author']['name']} написал книгу, которая называется {$result1['book']['title']}" . PHP_EOL;
+echo "{$result1['author']['name']} ждёт ваших отзывов, напишите ему на электронную почту {$result1['author']['email']}" . PHP_EOL;
 
 
 

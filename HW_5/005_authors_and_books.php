@@ -1,4 +1,3 @@
-<pre>
 <?php
 /*
 Что нужно сделать:
@@ -80,7 +79,5 @@ $library = [
     ]
 ];
 foreach ($library['books'] as $book) {
-    echo 'Книга "' . $book['title'] . '", её написал ' . $library['authors'][$book['author']]['name'] . " " . $library['authors'][$book['author']]['bDay'] . " " . $book['author'] . ".\n";
+    echo "Книга  {$book['title']}, её написал {$library['authors'][$book['author']]['name']} {$library['authors'][$book['author']]['bDay']} {$book['author']}".PHP_EOL;
 }
-?>
-</pre>

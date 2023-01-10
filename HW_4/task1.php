@@ -9,7 +9,9 @@ var_dump('Сумма ' . ($number1 + $number2));
 var_dump('Разность ' . ($number1 - $number2));
 var_dump('Произведение ' . ($number1 * $number2));
 var_dump('Частное ' . ($number1 / $number2));
+var_dump('Инкремента $number1 ' . $number1++);
+var_dump('Прекремент $number2 ' . ++$number2);
 
 var_dump($number1 > $number2);
 var_dump($number1 < $number2);
-var_dump($number1 == $number2);
+var_dump($number1 === $number2);

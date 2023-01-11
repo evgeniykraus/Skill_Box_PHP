@@ -44,7 +44,7 @@ $city2Radius = rand(1, 20);
 
 for ($i = 1; $i < NUMBER_OF_CARS; $i++) {
     $carLocation = rand(0, 1000);
-    if (inCityRange($city1, $city1Radius, $carLocation) or inCityRange($city2, $city2Radius, $carLocation)) {
+    if (inCityRange($city1, $city1Radius, $carLocation) || inCityRange($city2, $city2Radius, $carLocation)) {
         echo "Машина $i едет по городу на $carLocation км со скоростью не более 70" . PHP_EOL;
     }
 }

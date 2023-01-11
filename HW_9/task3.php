@@ -15,7 +15,7 @@ $sum = 0;
 
 for ($i = 0; $i < rand(3, 20); $i++) {
     $numbers[$i] = rand(0, 10);
-    if ($i % 2 !== 0){
+    if ($i % 2 !== 0) {
         $sum += $numbers[$i];
     }
 }

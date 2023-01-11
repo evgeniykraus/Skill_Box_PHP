@@ -10,7 +10,7 @@
 */
 function pluralCategory($count)
 {
-    $mod10  = $count % 10;
+    $mod10 = $count % 10;
     $mod100 = $count % 100;
 
     if (is_int($count) && $mod10 == 1 && $mod100 != 11) {

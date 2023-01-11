@@ -12,7 +12,7 @@
 
 $values = [];
 
-for ($i = 0; $i < 10; $i++){
+for ($i = 0; $i < 10; $i++) {
     $values[$i] = rand(0, 100);
 }
 

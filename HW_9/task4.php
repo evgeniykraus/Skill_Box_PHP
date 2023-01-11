@@ -24,7 +24,8 @@ $city2Radius — радиус второго города, задается в �
 const NUMBER_OF_CARS = 100;
 
 //Если машина находится в радиусе города, вернется true
-function inCityRange($city, $cityRadius, $carLocation){
+function inCityRange($city, $cityRadius, $carLocation)
+{
     if (($city - $cityRadius <= $carLocation) && ($carLocation <= $city + $cityRadius)) {
         return true;
     } else {

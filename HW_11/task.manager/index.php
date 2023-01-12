@@ -1,6 +1,6 @@
 <?php
 include $_SERVER['DOCUMENT_ROOT'] . '/header.php';
-
+include $_SERVER['DOCUMENT_ROOT'] . '/data/checkCredentials.php';
 ?>
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -23,7 +23,26 @@ include $_SERVER['DOCUMENT_ROOT'] . '/header.php';
                     <div class="clearfix"></div>
                 </div>
 
-                <?php include $_SERVER['DOCUMENT_ROOT'] . '/auth_form.php';?>
+                <div class="index-auth">
+                    <form action="index.php?login=yes" method="post">
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                            <tr>
+                                <?php
+                                if (loginDetailsSet() && checkData($login, $password)) {
+                                    include $_SERVER['DOCUMENT_ROOT'] . '/include/success_message.php';
+                                } elseif (isset($_GET['login'])) {
+                                    if ($_GET['login'] === 'yes') {
+                                        include $_SERVER['DOCUMENT_ROOT'] . '/include/auth_form.php';
+                                    }
+                                    if (loginDetailsSet() && !checkData($login, $password)) {
+                                        include $_SERVER['DOCUMENT_ROOT'] . '/include/error_message.php';
+                                    }
+                                }
+                                ?>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
 
             </td>
         </tr>

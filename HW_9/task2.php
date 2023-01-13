@@ -11,12 +11,14 @@
 */
 
 $values = [];
-
+$minValue = +INF;
 for ($i = 0; $i < 10; $i++) {
     $values[$i] = rand(0, 100);
+    $minValue = ($values[$i] < $minValue) ? $values[$i] : $minValue;
 }
+
 
 var_dump($values);
 
-var_dump('Минимальное число '. $values[array_search(min($values), $values)]);
-var_dump('Позиция '. array_search(min($values), $values));
+var_dump('Минимальное число '. $minValue);
+var_dump('Позиция '. array_search($minValue, $values));

@@ -1,7 +1,6 @@
 <?php
 require('functions.php');
 
-// require __DIR__ . '/cut_string.php';
 $data = [
     'short line',
     'what the fox say?',

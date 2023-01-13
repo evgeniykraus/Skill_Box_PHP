@@ -18,4 +18,5 @@ for ($i = 0; $i < 10; $i++) {
 
 var_dump($values);
 
-var_dump(array_search(min($values), $values));
+var_dump('Минимальное число '. $values[array_search(min($values), $values)]);
+var_dump('Позиция '. array_search(min($values), $values));

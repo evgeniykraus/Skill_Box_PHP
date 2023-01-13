@@ -18,4 +18,4 @@ for ($i = 0; $i < 10; $i++) {
 
 var_dump($values);
 
-var_dump(array_search(max($values), $values));
+var_dump(array_search(min($values), $values));

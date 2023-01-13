@@ -24,17 +24,6 @@ o - 1
 */
 
 $line = 'Student, hello!';
-$result = [];
 
-
-foreach (array_unique(str_split($line)) as $uniqueSymbol) {
-    $result[$uniqueSymbol] = 0;
-    foreach (str_split($line) as $symbol) {
-        if ($symbol === $uniqueSymbol) {
-            $result[$uniqueSymbol] += 1;
-        }
-    }
-}
-
-var_dump($result);
+var_dump(array_count_values(str_split($line)));
 

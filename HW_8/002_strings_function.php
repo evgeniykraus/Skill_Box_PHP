@@ -8,7 +8,7 @@ var_dump(trim($url, '/'));
 
 // 2. Уберите из строки все запятые и точки, а пробелы замените на тире
 $line = 'Good news, everyone.';
-var_dump(str_replace(' ', '-', str_replace('.', '', str_replace(',', '', $line))));
+var_dump(str_replace(' ', '-', str_replace(['.', ','], '', $line)));
 
 // 3. Посчитайте и выведите длину строки переменной $line
 $length = strlen($line);
@@ -21,7 +21,6 @@ var_dump($position);
 
 
 // 5. Вырежьте из строки $line подстроку после запятой до предпоследнего символа с конца
-$resultLine = substr($line, 10,-2);
+$resultLine = substr($line, $position + 1,-2);
 var_dump($resultLine);
 var_dump(str_replace($resultLine, '',$line));
-

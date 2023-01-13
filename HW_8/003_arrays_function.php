@@ -69,16 +69,16 @@ var_dump($hasVasyaPupkin);
 
 
 // 5. Используя подходящую встроенную функцию, добавьте в библиотеку еще одну книгу Мартина Фаулера
-$library['books'][] = [
+array_push($library['books'], [
     'title' => 'Новая книга Мартина Фаулера',
     'author' => 'martin_fauler@example.com',
-    'year' => 2023,
-];
+    'year' => 2023,]);
+
 var_dump($library);
 
 
 // 6. Используя подходящую встроенную функцию, добавьте в библиотеку на первую полку еще одну книгу Мартина Фаулера
-array_unshift($library['books'] , [
+array_unshift($library['books'], [
     'title' => 'Первая книга Мартина Фаулера',
     'author' => 'martin_fauler@example.com',
     'year' => 2023,

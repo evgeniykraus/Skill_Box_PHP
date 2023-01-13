@@ -8,7 +8,7 @@ var_dump(trim($url, '/'));
 
 // 2. Уберите из строки все запятые и точки, а пробелы замените на тире
 $line = 'Good news, everyone.';
-var_dump(str_replace(' ', '-', str_replace(['.', ','], '', $line)));
+var_dump(str_replace(['.', ',', ' '], ['', '', '-'], $line));
 
 // 3. Посчитайте и выведите длину строки переменной $line
 $length = strlen($line);

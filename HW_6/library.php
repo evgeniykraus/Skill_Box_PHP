@@ -53,13 +53,10 @@ $red = (bool)rand(0, 1);
     <meta charset="UTF-8">
     <title><?= $title ?></title>
     <link rel="stylesheet" type="text/css" href="style.css">
-    <?php if ($red): ?>
-        <link rel="stylesheet" type="text/css" href="alternativeStyle.css">
-    <?php endif; ?>
 </head>
 <body>
 
-<h1><?= $title ?></h1>
+<h1 class="<?= ($red) ? 'red' : ''; ?>"><?= $title ?></h1>
 <div>Авторов на портале <?= count($library['authors']) ?></div>
 <!-- Выведите все книги -->
 <?php

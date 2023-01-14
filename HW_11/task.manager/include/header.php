@@ -2,15 +2,15 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link href="styles.css" rel="stylesheet">
+    <link href="../styles.css" rel="stylesheet">
     <title>Project - ведение списков</title>
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 </head>
 
 <body>
 
 <div class="header">
-    <div class="logo"><img src="i/logo.png" alt="Project"></div>
+    <div class="logo"><img src="../img/logo.png" alt="Project"></div>
     <div class="author">Автор: <span class="author__name">Евгений Краус</span></div>
 </div>
 
@@ -21,5 +21,6 @@
         <li><a href="#">Контакты</a></li>
         <li><a href="#">Новости</a></li>
         <li><a href="#">Каталог</a></li>
+        <li><a href="/index.php?login=yes">Войти</a></li>
     </ul>
 </div>

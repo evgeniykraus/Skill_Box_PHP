@@ -1,23 +1,20 @@
 <?php
 $login = $_POST['login'] ?? '';
 $password = $_POST['password'] ?? '';
-function checkData($login, $password)
+
+function loginDetailsSet()
+{
+    return isset($_POST['login']) && isset($_POST['password']);
+}
+
+function getSuccess(string $login, string $password): bool
 {
     include $_SERVER['DOCUMENT_ROOT'] . '/data/users.php';
     include $_SERVER['DOCUMENT_ROOT'] . '/data/passwords.php';
 
     if (array_search($login, $users) !== false) {
-        if ($passwords[array_search($login, $users)] === $password) {
-            return true;
-        } else {
-            return false;
-        }
+        return ($passwords[array_search($login, $users)] === $password);
     } else {
         return false;
     }
-}
-
-function loginDetailsSet()
-{
-    return isset($_POST['login']) && isset($_POST['password']);
 }

@@ -28,13 +28,13 @@ include $_SERVER['DOCUMENT_ROOT'] . '/data/checkCredentials.php';
                         <table width="100%" border="0" cellspacing="0" cellpadding="0">
                             <tr>
                                 <?php
-                                if (loginDetailsSet() && checkData($login, $password)) {
+                                if (loginDetailsSet() && getSuccess($login, $password)) {
                                     include $_SERVER['DOCUMENT_ROOT'] . '/include/success_message.php';
                                 } elseif (isset($_GET['login'])) {
                                     if ($_GET['login'] === 'yes') {
                                         include $_SERVER['DOCUMENT_ROOT'] . '/include/auth_form.php';
                                     }
-                                    if (loginDetailsSet() && !checkData($login, $password)) {
+                                    if (loginDetailsSet() && !getSuccess($login, $password)) {
                                         include $_SERVER['DOCUMENT_ROOT'] . '/include/error_message.php';
                                     }
                                 }

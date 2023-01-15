@@ -1,10 +1,10 @@
 <?php
-include 'lib/thumbs-master/thumbs.php';
+//include 'lib/thumbs-master/thumbs.php';
 include 'output_img.php';
 include 'drop_img.php';
 
-$image = new Thumbs(__DIR__ . '/img/originals/img-01.jpg');
-$image->cut(300, 300);
+//$image = new Thumbs(__DIR__ . '/img/originals/img-01.jpg');
+//$image->cut(300, 300);
 ?>
 
 <!DOCTYPE html>

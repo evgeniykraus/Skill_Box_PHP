@@ -31,6 +31,7 @@ class Thumbs
 						break;
 					default:
 						throw new Exception('Формат файла не подерживается');
+						break;
 				}
 			}
 		}

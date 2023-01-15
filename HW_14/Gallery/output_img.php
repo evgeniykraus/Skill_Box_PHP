@@ -2,7 +2,7 @@
 function outputImg()
 {
 
-    $dir = 'img/preview/'; // Папка с изображениями
+    $dir = $_SERVER['DOCUMENT_ROOT'] . '/img/upload/preview/'; // Папка с изображениями
     $images = scandir($dir); // Берём всё содержимое директории
     $count = 1;
     foreach ($images as $image) {
@@ -23,7 +23,7 @@ function outputImg()
                     <label for="photo">
                         <input type="submit" value="Удалить"/>
                         Выбрать:
-                        <input type="checkbox" />
+                        <input type="checkbox"/>
                     </label>
                 </form>
 

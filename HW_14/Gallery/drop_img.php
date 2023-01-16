@@ -1,5 +1,5 @@
 <?php
-function dropImg(): void
+function dropImg()
 {
     if (!empty($_POST['deleted'])) {
         $filename = $_POST['deleted'];

@@ -1,52 +1,30 @@
 <?php
-//include 'lib/thumbs-master/thumbs.php';
-include 'output_img.php';
-include 'drop_img.php';
-
-//$image = new Thumbs(__DIR__ . '/img/originals/img-01.jpg');
-//$image->cut(300, 300);
+include $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
 ?>
 
-<!DOCTYPE html>
-<html lang="ru">
+    <form action="route/create/" method="get">
+        <input type="submit" value="Добавить фото"/>
+    </form>
 
-<head>
-    <title>Photo Gallery — Practice</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta charset="utf-8">
-    <link href="css/reset.css" rel="stylesheet">
-    <link href="lightbox/css/lightbox.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300" rel="stylesheet">
-    <link href="css/style.css" rel="stylesheet">
-</head>
+    <form method="post">
 
-<body>
+        <div id="gallery">
 
-<div class="container">
-    <h1>Amazing Photo Gallery</h1>
+            <?php
+            outputImg();
+            ?>
 
-    <div class="top-menu">
-        <label for="photo">
-            <form action="" method="post">
-                <input type="submit" value="Удалить выбранные фото"/>
-                Выбрать все фото: <input type="checkbox" />
-            </form>
-            <br>
-            <form action="route/create/" method="get">
-                <input type="submit" value="Добавить фото"/>
-            </form>
+        </div>
 
-        </label>
-    </div>
-
-    <div id="gallery">
-        <?= outputImg() ?>
-
-        <?php
-        dropImg();
-        ?>
-    </div>
-
+        <label for="container">
+            <input type="submit" value="Удалить выбранные фото"/>
+            <input type="hidden" name="drop" value="true"/>
+            Выбрать все фото: <input type="checkbox" name="selectedPhotos" value="dropAllPhotos"/>
+            <?php
+            dropImg();
+            ?>
+    </form>
+    </label>
 </div>
 
 <script src="lightbox/js/lightbox-plus-jquery.min.js"></script>

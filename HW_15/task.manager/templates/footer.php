@@ -5,13 +5,11 @@
         <li><a href="/route/contacts">Контакты</a></li>
         <li><a href="/route/news">Новости</a></li>
         <li><a href="/route/catalog">Каталог</a></li>
-        <?php if (isset($_SESSION["is_logged_in"])) {
-            if ($_SESSION["is_logged_in"]) { ?>
-                <li><a href="/?logout=true">Выйти</a></li>
-            <?php } ?>
-        <?php } else { ?>
-            <li><a href="/?login=true">Войти</a></li>
-        <?php } ?>
+        <li>
+            <a href="/?<?= ($auth->isLoggedIn() ? 'logout=true' : 'login=true'); ?>">
+                <?= ($auth->isLoggedIn() ? 'Выход' : 'Войти'); ?>
+            </a>
+        </li>
     </ul>
 </div>
 

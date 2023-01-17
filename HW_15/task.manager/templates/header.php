@@ -1,25 +1,24 @@
 <?php
-//if (isset($_COOKIE[session_name()])) session_start();
-
-
-$session_lifetime = session_get_cookie_params()['lifetime'];
-$session_lifetime += (60 * 15);
-session_set_cookie_params($session_lifetime);
-
-
-$cookie_lifetime = ini_get('session.cookie_lifetime');
-$cookie_lifetime += (60 * 15);
-ini_set('session.cookie_lifetime', $cookie_lifetime);
-
-if (isset($_COOKIE[session_name()])) {
-    session_start();
-}
 
 require $_SERVER['DOCUMENT_ROOT'] . '/src/core.php';
+
+$auth = new AuthClass();
+
+session_start();
+$auth->setAuthCookie(COOKIES_LIFETIME);
+
+if (!$auth->isLoggedIn()) {
+    if ($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] !== 'task.manager/?login=true') {
+        header('Location: http://task.manager/?login=true');
+        exit();
+    }
+}
+
+
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <link href="/css/styles.css" rel="stylesheet">
@@ -41,13 +40,10 @@ require $_SERVER['DOCUMENT_ROOT'] . '/src/core.php';
         <li><a href="/route/contacts">Контакты</a></li>
         <li><a href="/route/news">Новости</a></li>
         <li><a href="/route/catalog">Каталог</a></li>
-        <?php if (isset($_SESSION["is_logged_in"])) {
-            if ($_SESSION["is_logged_in"]) { ?>
-                <li><a href="/?logout=true">Выйти</a></li>
-                <?php
-            } ?>
-        <?php } else { ?>
-            <li><a href="/?login=true">Войти</a></li>
-        <?php } ?>
+        <li>
+            <a href="/?<?= ($auth->isLoggedIn() ? 'logout=true' : 'login=true'); ?>">
+                <?= ($auth->isLoggedIn() ? 'Выход' : 'Войти'); ?>
+            </a>
+        </li>
     </ul>
 </div>

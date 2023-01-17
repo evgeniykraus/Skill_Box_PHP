@@ -11,36 +11,32 @@
 
     <div class="index-auth">
         <?php
-        if (getSuccess(trim($login), $password)) {
-            session_start();
-            setcookie('is_logged_in', true, time() + (60 * 15), "/");
-            $_SESSION["is_logged_in"] = true;
+        if ($auth->auth(trim(LOGIN), PASSWORD)) {
             include 'success_message.php';
         } else { ?>
-            <form action="index.php?login=yes" method="post">
+            <form action="/?login=true" method="post">
                 <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
                         <td class="iat">
                             <label for="login_id">Ваш e-mail:</label>
                             <input id="login_id" size="30" name="login"
-                                   value="<?= htmlspecialchars($login) ?? '' ?>">
+                                   value="<?= (isset($_POST['login'])) ? $_POST['login'] : $auth->getLogin() ?>">
                         </td>
                     </tr>
                     <tr>
                         <td class="iat">
                             <label for="password_id">Ваш пароль:</label>
-                            <input id="password_id" size="30" name="password" type="password"
-                                   value="<?= htmlspecialchars($password) ?? '' ?>">
+                            <input id="password_id" size="30" name="password" type="password">
                         </td>
                     </tr>
                     <tr>
                         <td><input type="submit" value="Войти"></td>
                     </tr>
 
-
                 </table>
+
                 <?php
-                if (loginDetailsSet() && !getSuccess($login, $password)) {
+                if ($auth->loginDetailsSet() && !$auth->auth(trim(LOGIN), PASSWORD)) {
                     include 'error_message.php';
                 }
                 ?>

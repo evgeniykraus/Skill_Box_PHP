@@ -1,4 +1,3 @@
 <?php
-
-require_once 'check_credentials.php';
-require 'refresh_page.php';
+require_once 'constants.php';
+require_once 'auth.php';

@@ -1,13 +1,16 @@
 <?php
 function dropImg()
 {
-    $dir = $_SERVER['DOCUMENT_ROOT'] . '/img/upload/preview/';
+    $dirPreview = $_SERVER['DOCUMENT_ROOT'] . '/img/upload/preview/';
+    $dirOriginals = $_SERVER['DOCUMENT_ROOT'] . '/img/upload/originals/';
     if (isset($_POST["selectedPhotos"]) && $_POST["drop"] === "true") {
         if ($_POST["selectedPhotos"] === "dropAllPhotos") {
-            $images = scandir($dir);
-            dropFile($images, $dir);
+            $images = scandir($dirPreview);
+            dropFile($images, $dirPreview);
+            dropFile($images, $dirOriginals);
         } else {
-            dropFile($_POST["selectedPhotos"], $dir);
+            dropFile($_POST["selectedPhotos"], $dirPreview);
+            dropFile($_POST["selectedPhotos"], $dirOriginals);
         }
     }
 }

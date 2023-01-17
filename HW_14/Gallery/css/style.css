@@ -83,3 +83,38 @@ body {
     visibility: visible;
 }
 
+.btn {
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    padding: .8em 1em calc(.8em + 3px);
+    border-radius: 3px;
+    background: rgb(64,199,129);
+    box-shadow: 0 -3px rgb(53,167,110) inset;
+    transition: 0.2s;
+    margin-bottom: 20px;
+}
+.btn:hover { background: rgb(53, 167, 110); }
+.btn:active {
+    background: rgb(33,147,90);
+    box-shadow: 0 3px rgb(33,147,90) inset;
+}
+
+.btn2 {
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    text-decoration: none;
+    padding: .8em 1em calc(.8em + 3px);
+    border-radius: 3px;
+    background: rgb(218, 21, 21);
+    box-shadow: 0 -3px rgb(178, 24, 24) inset;
+    transition: 0.2s;
+    margin-bottom: 20px;
+}
+.btn2:hover { background: rgb(164, 20, 20); }
+.btn2:active {
+    background: rgb(162, 28, 28);
+    box-shadow: 0 3px rgb(168, 13, 13) inset;
+}

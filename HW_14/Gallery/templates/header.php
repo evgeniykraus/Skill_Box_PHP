@@ -6,7 +6,7 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/src/core.php';
 <html lang="ru">
 
 <head>
-    <title>Photo Gallery — Practice</title>
+    <title>Фотогалерея</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <link href="css/reset.css" rel="stylesheet">
@@ -19,4 +19,4 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/src/core.php';
 
 <div class="container">
 
-    <h1>Amazing Photo Gallery</h1>
+    <h1>ПОТРЯСАЮЩАЯ ФОТОГАЛЕРЕЯ</h1>

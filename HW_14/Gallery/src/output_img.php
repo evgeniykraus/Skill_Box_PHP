@@ -9,18 +9,20 @@ function outputImg()
     $count = 1;
     foreach ($images as $image) {
         $urlPreviewImg = 'img/upload/preview/' . $image;
-        $urlOriginalImg = 'img/upload/originals/' . preg_replace('/-min\.jpg$/', '.jpg', $image);
+        $urlOriginalImg = 'img/upload/originals/' . preg_replace('/-mini\.jpg$/', '.jpg', $image);
 
 
         if (!is_dir($image)) {
             ?>
             <figure class="photo">
                 <figcaption>Фото №<?= $count ?></figcaption>
-                <a href="<?= $urlOriginalImg ?>" data-lightbox="roadtrip" data-title="img_<?= $count ?>">
+                <a href="<?= $urlOriginalImg ?>" data-lightbox="roadtrip" data-title="<?='img_' . $count ?>">
                     <img src="<?= $urlPreviewImg ?>" alt="img_<?= $count ?>"/>
                 </a>
 
-                <label for="photo"> Выбрать:
+                <label for="photo">
+                    <samp>Дата загрузки: <?=date("d.m.Y", filectime($urlOriginalImg))?> </samp><br>
+                    Выбрать:
                     <input type="checkbox" name="selectedPhotos[]" value="<?= $image ?>"/>
                 </label>
             </figure>

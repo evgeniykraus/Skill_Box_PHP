@@ -1,0 +1,72 @@
+-- Создание таблицы 'user_groups'
+CREATE TABLE USERS
+(
+    ID                  INT          NOT NULL AUTO_INCREMENT,
+    ACTIVE              TINYINT(1)   NOT NULL DEFAULT 0,
+    NAME                VARCHAR(100) NOT NULL,
+    SURNAME             VARCHAR(100) NOT NULL,
+    PATRONYMIC          VARCHAR(100) NOT NULL,
+    EMAIL               VARCHAR(255) NOT NULL,
+    PHONE               VARCHAR(255) NOT NULL,
+    PASSWORD            VARCHAR(255) NOT NULL,
+    EMAIL_NOTIFICATIONS TINYINT(1)   NOT NULL DEFAULT 0,
+    PRIMARY KEY (ID)
+);
+
+-- Создание таблицы 'groups'
+CREATE TABLE `GROUPS`
+(
+    ID          INT          NOT NULL AUTO_INCREMENT,
+    NAME        VARCHAR(255) NOT NULL,
+    DESCRIPTION TEXT         NOT NULL,
+    PRIMARY KEY (ID)
+);
+
+-- Создание таблицы 'group_user'
+CREATE TABLE GROUP_USER
+(
+    ID       INT NOT NULL AUTO_INCREMENT,
+    GROUP_ID INT NOT NULL,
+    USER_ID  INT NOT NULL,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (GROUP_ID) REFERENCES `GROUPS` (ID),
+    FOREIGN KEY (USER_ID) REFERENCES USERS (ID)
+);
+
+-- Создание таблицы 'categories'
+CREATE TABLE CATEGORIES
+(
+    ID         INT          NOT NULL AUTO_INCREMENT,
+    PARENT_ID  INT,
+    NAME       VARCHAR(255) NOT NULL,
+    TITLE      VARCHAR(255) NOT NULL,
+    CREATED_AT DATETIME     NOT NULL,
+    CREATED_BY INT          NOT NULL,
+    COLOR      VARCHAR(255) NOT NULL,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (CREATED_BY) REFERENCES USERS (ID)
+);
+
+-- Создание таблицы 'groups'
+CREATE TABLE MESSAGES
+(
+    ID                INT          NOT NULL AUTO_INCREMENT,
+    TEXT              TEXT         NOT NULL,
+    TITLE             VARCHAR(255) NOT NULL,
+    CREATED_AT        DATETIME     NOT NULL,
+    SENDER_USER_ID    INT          NOT NULL,
+    RECIPIENT_USER_ID INT          NOT NULL,
+    READ_MARK         TINYINT(1)   NOT NULL DEFAULT 0,
+    PRIMARY KEY (ID)
+);
+
+-- Создание таблицы 'category_message'
+CREATE TABLE CATEGORY_MESSAGE
+(
+    ID          INT NOT NULL AUTO_INCREMENT,
+    CATEGORY_ID INT NOT NULL,
+    MESSAGE_ID  INT NOT NULL,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (CATEGORY_ID) REFERENCES CATEGORIES (ID),
+    FOREIGN KEY (MESSAGE_ID) REFERENCES MESSAGES (ID)
+);

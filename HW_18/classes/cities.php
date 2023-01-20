@@ -21,7 +21,7 @@ class Cities
 
     public function addCity($name, $founded_at, $countryName): bool
     {
-        $countries = new Country($this->conn);
+        $countries = new Countries($this->conn);
         $country_id = $countries->getCountryID($countryName);
 
 

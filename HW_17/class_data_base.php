@@ -49,7 +49,7 @@ class TestDataBase
         $query = "INSERT INTO animal_classes (name, can_flying) VALUES (?, 0)
                   ON DUPLICATE KEY UPDATE name = '$animal_class'";
 
-        $animal_class = $this->checkConstraint('animal_classes', $query, $animal_class);
+        $animal_class = $this->checkConstraint('Animal_classes', $query, $animal_class);
 
         $query = "INSERT INTO animals (name, can_flying, legs_count, class_id) VALUES (?, ?, ?, $animal_class)";
         $stmt = $this->connect->prepare($query);

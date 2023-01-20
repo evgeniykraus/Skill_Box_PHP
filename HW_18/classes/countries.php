@@ -1,6 +1,6 @@
 <?php
 
-class Country
+class Countries
 {
     private $conn;
     private string $table = 'countries';
@@ -21,10 +21,12 @@ class Country
 
     public function addCountry($name, $code): bool
     {
-        $query = 'INSERT INTO ' . $this->table . ' SET name = ?, code = ?';
+        $query = 'INSERT INTO ' . $this->table . ' 
+                  SET name = ?, code = ?
+                  ON DUPLICATE KEY UPDATE name = ?';
 
         $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("ss", $name, $code);
+        $stmt->bind_param("sss", $name, $code, $name);
 
         if ($this->catchError($stmt)) {
             return true;

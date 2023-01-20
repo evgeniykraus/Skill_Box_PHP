@@ -57,7 +57,7 @@ $dataBase->addCity('Лас-Вегас', '12.12.1900', 1);
 */
 
 //Запрос, который укажет, что животные в классе «Насекомые» могут летать.
-$dataBase->updateTable('animal_classes', 'can_flying', '1', 'name', 'Насекомые');
+$dataBase->updateTable('Animal_classes', 'can_flying', '1', 'name', 'Насекомые');
 
 //Запрос, который установит стране Уругвай код URY.
 $dataBase->updateTable('countries', 'code', 'URY', 'name', 'Уругвай');

@@ -47,7 +47,7 @@ CREATE TABLE CATEGORIES
     FOREIGN KEY (CREATED_BY) REFERENCES USERS (ID)
 );
 
--- Создание таблицы 'groups'
+-- Создание таблицы 'messages'
 CREATE TABLE MESSAGES
 (
     ID                INT          NOT NULL AUTO_INCREMENT,

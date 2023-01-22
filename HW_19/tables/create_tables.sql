@@ -1,72 +1,71 @@
--- Создание таблицы 'user_groups'
-CREATE TABLE USERS
+-- создание таблицы 'users'
+create table users
 (
-    ID                  INT          NOT NULL AUTO_INCREMENT,
-    ACTIVE              TINYINT(1)   NOT NULL DEFAULT 0,
-    NAME                VARCHAR(100) NOT NULL,
-    SURNAME             VARCHAR(100) NOT NULL,
-    PATRONYMIC          VARCHAR(100) NOT NULL,
-    EMAIL               VARCHAR(255) NOT NULL,
-    PHONE               VARCHAR(255) NOT NULL,
-    PASSWORD            VARCHAR(255) NOT NULL,
-    EMAIL_NOTIFICATIONS TINYINT(1)   NOT NULL DEFAULT 0,
-    PRIMARY KEY (ID)
+    id                  int          not null auto_increment,
+    active              tinyint(1)   not null default 0,
+    name                varchar(100) not null,
+    surname             varchar(100) not null,
+    patronymic          varchar(100) not null,
+    email               varchar(255) not null,
+    phone               varchar(255) not null,
+    password            varchar(255) not null,
+    email_notifications tinyint(1)   not null default 0,
+    primary key (id)
 );
 
--- Создание таблицы 'groups'
-CREATE TABLE `GROUPS`
+-- создание таблицы 'groups'
+create table `groups`
 (
-    ID          INT          NOT NULL AUTO_INCREMENT,
-    NAME        VARCHAR(255) NOT NULL,
-    DESCRIPTION TEXT         NOT NULL,
-    PRIMARY KEY (ID)
+    id          int          not null auto_increment,
+    name        varchar(255) not null,
+    description text         not null,
+    primary key (id)
 );
 
--- Создание таблицы 'group_user'
-CREATE TABLE GROUP_USER
+-- создание таблицы 'group_user'
+create table group_user
 (
-    ID       INT NOT NULL AUTO_INCREMENT,
-    GROUP_ID INT NOT NULL,
-    USER_ID  INT NOT NULL,
-    PRIMARY KEY (ID),
-    FOREIGN KEY (GROUP_ID) REFERENCES `GROUPS` (ID),
-    FOREIGN KEY (USER_ID) REFERENCES USERS (ID)
+    id       int not null auto_increment,
+    group_id int not null,
+    user_id  int not null,
+    primary key (id),
+    foreign key (group_id) references `groups` (id),
+    foreign key (user_id) references users (id)
 );
 
--- Создание таблицы 'categories'
-CREATE TABLE CATEGORIES
+-- создание таблицы 'categories'
+create table categories
 (
-    ID         INT          NOT NULL AUTO_INCREMENT,
-    PARENT_ID  INT,
-    NAME       VARCHAR(255) NOT NULL,
-    TITLE      VARCHAR(255) NOT NULL,
-    CREATED_AT DATETIME     NOT NULL,
-    CREATED_BY INT          NOT NULL,
-    COLOR      VARCHAR(255) NOT NULL,
-    PRIMARY KEY (ID),
-    FOREIGN KEY (CREATED_BY) REFERENCES USERS (ID)
+    id         int          not null auto_increment,
+    parent_id  int,
+    title      varchar(255) not null,
+    created_at datetime     not null,
+    created_by int          not null,
+    color      varchar(255) not null default 'white',
+    primary key (id),
+    foreign key (created_by) references users (id)
 );
 
--- Создание таблицы 'messages'
-CREATE TABLE MESSAGES
+-- создание таблицы 'messages'
+create table messages
 (
-    ID                INT          NOT NULL AUTO_INCREMENT,
-    TEXT              TEXT         NOT NULL,
-    TITLE             VARCHAR(255) NOT NULL,
-    CREATED_AT        DATETIME     NOT NULL,
-    SENDER_USER_ID    INT          NOT NULL,
-    RECIPIENT_USER_ID INT          NOT NULL,
-    READ_MARK         TINYINT(1)   NOT NULL DEFAULT 0,
-    PRIMARY KEY (ID)
+    id                int          not null auto_increment,
+    text              text         not null,
+    title             varchar(255) not null,
+    created_at        datetime     not null,
+    sender_user_id    int          not null,
+    recipient_user_id int          not null,
+    read_mark         tinyint(1)   not null default 0,
+    primary key (id)
 );
 
--- Создание таблицы 'category_message'
-CREATE TABLE CATEGORY_MESSAGE
+-- создание таблицы 'category_message'
+create table category_message
 (
-    ID          INT NOT NULL AUTO_INCREMENT,
-    CATEGORY_ID INT NOT NULL,
-    MESSAGE_ID  INT NOT NULL,
-    PRIMARY KEY (ID),
-    FOREIGN KEY (CATEGORY_ID) REFERENCES CATEGORIES (ID),
-    FOREIGN KEY (MESSAGE_ID) REFERENCES MESSAGES (ID)
+    id          int not null auto_increment,
+    category_id int not null,
+    message_id  int not null,
+    primary key (id),
+    foreign key (category_id) references categories (id),
+    foreign key (message_id) references messages (id)
 );

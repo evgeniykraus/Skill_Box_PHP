@@ -1,0 +1,198 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #f1f1f1;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header nav {
+    display: flex;
+}
+
+header nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+header nav ul li {
+    margin-right: 10px;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #000;
+}
+
+header nav ul li a:hover {
+    background-color: #ccc;
+}
+
+.right-corner a {
+    text-decoration: none;
+    color: #000;
+    margin-left: 10px;
+}
+
+.right-corner a:hover {
+    background-color: #ccc;
+}
+
+main .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+footer {
+    background-color: #f1f1f1;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+/* Login Form */
+main.auth {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #f1f1f1;
+    width: 50%;
+    height: 50%;
+    text-align: center;
+    overflow: hidden;
+}
+
+.login-form input[type="text"],
+.login-form input[type="password"] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: none;
+    border-bottom: 2px solid #ccc;
+}
+
+.login-form input[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.login-form input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+.user-card {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto;
+    height: auto;
+    background-color: #f1f1f1;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.user-card__header {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+.user-card__photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 20px;
+}
+
+.user-card__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-card__info {
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: left;
+}
+
+.user-card__photo-input {
+    display: none;
+}
+
+
+.user-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+
+.message-form {
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.message-form__select,
+.message-form__textarea {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+}
+
+.message-form__submit {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.message-form__submit:hover {
+    background-color: #45a049;
+}
+
+.groups {
+    text-align: left;
+}
+
+
+
+
+

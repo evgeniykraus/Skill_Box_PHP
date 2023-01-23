@@ -11,7 +11,7 @@
 
     <div class="index-auth">
         <?php
-        if ($auth->auth(trim(LOGIN), PASSWORD)) {
+        if ($auth->auth(LOGIN, PASSWORD)) {
             include 'success_message.php';
         } else { ?>
             <form action="/?login=true" method="post">
@@ -36,7 +36,7 @@
                 </table>
 
                 <?php
-                if ($auth->loginDetailsSet() && !$auth->auth(trim(LOGIN), PASSWORD)) {
+                if ($auth->loginDetailsSet() && !$auth->auth(LOGIN, PASSWORD)) {
                     include 'error_message.php';
                 }
                 ?>

@@ -6,9 +6,11 @@
         <li><a href="/route/news">Новости</a></li>
         <li><a href="/route/catalog">Каталог</a></li>
         <li>
-            <a href="/?<?= ($auth->isLoggedIn() ? 'logout=true' : 'login=true'); ?>">
-                <?= ($auth->isLoggedIn() ? 'Выход' : 'Войти'); ?>
-            </a>
+            <?php if ($auth->isLoggedIn()) { ?>
+                <a href="/?logout=true"> Выход </a>
+            <?php } else { ?>
+                <a href="/?login=true"> Войти </a>
+            <?php } ?>
         </li>
     </ul>
 </div>

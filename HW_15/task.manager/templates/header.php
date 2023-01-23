@@ -10,7 +10,6 @@ $auth->setAuthCookie(COOKIES_LIFETIME);
 if (!$auth->isLoggedIn()) {
     if ($_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] !== 'task.manager/?login=true') {
         header('Location: http://task.manager/?login=true');
-        exit();
     }
 }
 
@@ -41,9 +40,11 @@ if (!$auth->isLoggedIn()) {
         <li><a href="/route/news">Новости</a></li>
         <li><a href="/route/catalog">Каталог</a></li>
         <li>
-            <a href="/?<?= ($auth->isLoggedIn() ? 'logout=true' : 'login=true'); ?>">
-                <?= ($auth->isLoggedIn() ? 'Выход' : 'Войти'); ?>
-            </a>
+            <?php if ($auth->isLoggedIn()) { ?>
+                <a href="/?logout=true"> Выход </a>
+            <?php } else { ?>
+                <a href="/?login=true"> Войти </a>
+            <?php } ?>
         </li>
     </ul>
 </div>

@@ -26,6 +26,6 @@ require $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
             ?>
         </tr>
     </table>
-<?php include
-    $_SERVER['DOCUMENT_ROOT'] . '/templates/footer.php';
+<?php
+require $_SERVER['DOCUMENT_ROOT'] . '/templates/footer.php';
 ?>

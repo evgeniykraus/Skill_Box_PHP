@@ -1,6 +1,6 @@
 <?php
-require $_SERVER['DOCUMENT_ROOT'] . '/src/header.php';
-require $_SERVER['DOCUMENT_ROOT'] . '/src/check_credentials.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/include/header.php';
+require $_SERVER['DOCUMENT_ROOT'] . '/include/check_credentials.php';
 ?>
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -14,13 +14,13 @@ require $_SERVER['DOCUMENT_ROOT'] . '/src/check_credentials.php';
 
             <?php
             if (filter_var($_GET['login'] ?? false, FILTER_VALIDATE_BOOLEAN) && $_GET['login'] === 'yes') {
-                include $_SERVER['DOCUMENT_ROOT'] . '/src/auth_form.php';
+                include $_SERVER['DOCUMENT_ROOT'] . '/include/auth_form.php';
             }
             ?>
 
         </tr>
     </table>
 
-<?php include
-    $_SERVER['DOCUMENT_ROOT'] . '/src/footer.php';
+<?php
+require $_SERVER['DOCUMENT_ROOT'] . '/include/footer.php';
 ?>

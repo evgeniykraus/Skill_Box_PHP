@@ -10,7 +10,11 @@ class Users
         $this->conn = $db;
     }
 
-    public function usersList($userId)
+    /**
+     * @param int $userId
+     * @return array
+     */
+    public function usersList(int $userId): array
     {
         $query = "SELECT u.id, u.name, u.surname
                   FROM $this->table u
@@ -26,6 +30,11 @@ class Users
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    /**
+     * @param string $email
+     * @param string $password
+     * @return bool
+     */
     public function authorize(string $email, string $password): bool
     {
         $query = "SELECT users.id, users.name, phone, surname, password,
@@ -57,6 +66,10 @@ class Users
         return false;
     }
 
+    /**
+     * @param int $id
+     * @return array
+     */
     public function getUserGroups(int $id): array
     {
         $query = "SELECT g.id, g.name, g.description FROM `groups` g
@@ -70,6 +83,9 @@ class Users
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    /**
+     * @return void
+     */
     public function logOut(): void
     {
         session_unset();

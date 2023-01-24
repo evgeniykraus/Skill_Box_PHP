@@ -15,7 +15,7 @@ if (isset($_GET['logout']) && $_GET['logout']) {
 }
 
 if ($status) {
-    $messagesCount = $messages->getCountMessages($_SESSION['id']);
+    $messagesCount = $messages->getCountMessages($_SESSION['id'] ?? 0);
 }
 
 ?>

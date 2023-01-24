@@ -11,7 +11,15 @@ class Messages
     }
 
 
-    public function sendMessage($text, $title, $senderUserId, $recipientUserId, $categoryId) : bool
+    /**
+     * @param string $text
+     * @param string $title
+     * @param int $senderUserId
+     * @param int $recipientUserId
+     * @param int $categoryId
+     * @return bool
+     */
+    public function sendMessage(string $text, string $title, int $senderUserId, int $recipientUserId, int $categoryId): bool
     {
         $query = "INSERT INTO messages (text, title, created_at, sender_user_id, recipient_user_id)
                   VALUES (?, ?, sysdate(), ?, ?)";
@@ -23,7 +31,12 @@ class Messages
         return $this->seedCategoryMessage($stmt->insert_id, $categoryId);
     }
 
-    private function seedCategoryMessage($messageId, $categoryId) : bool
+    /**
+     * @param int $messageId
+     * @param int $categoryId
+     * @return bool
+     */
+    private function seedCategoryMessage(int $messageId, int $categoryId): bool
     {
         $query = "INSERT INTO category_message (message_id, category_id)
                   VALUES ($messageId, ?)";
@@ -32,7 +45,12 @@ class Messages
         return $stmt->execute();
     }
 
-    public function getCountMessages($recipientId)
+
+    /**
+     * @param int $recipientId
+     * @return int
+     */
+    public function getCountMessages(int $recipientId): int
     {
         $query = "SELECT count(m.id) AS id
                   FROM $this->table m
@@ -48,7 +66,12 @@ class Messages
         return $stmt->get_result()->fetch_assoc()['id'];
     }
 
-    public function getMessageById(int $messageId, int $recipientId)
+    /**
+     * @param int $messageId
+     * @param int $recipientId
+     * @return array
+     */
+    public function getMessageById(int $messageId, int $recipientId): array
     {
         $query = "SELECT m.title,
                          m.created_at + INTERVAL 4 HOUR AS created_at,
@@ -71,7 +94,11 @@ class Messages
         return $result->fetch_assoc();
     }
 
-    private function readMessage($messageId): void
+    /**
+     * @param int $messageId
+     * @return void
+     */
+    private function readMessage(int $messageId): void
     {
         $query = "UPDATE $this->table 
                   SET read_mark = 1
@@ -81,7 +108,12 @@ class Messages
         $stmt->execute();
     }
 
-    public function getAllUserMessages(int $recipientUserId, int $readMark)
+    /**
+     * @param int $recipientUserId
+     * @param int $readMark
+     * @return array
+     */
+    public function getAllUserMessages(int $recipientUserId, int $readMark): array
     {
         $query = "SELECT m.*, c.title category_title, c.id category_id
                   FROM $this->table m
@@ -96,6 +128,9 @@ class Messages
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
+    /**
+     * @return array
+     */
     public function getAllCategories(): array
     {
         $query = 'SELECT * FROM  categories

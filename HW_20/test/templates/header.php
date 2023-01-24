@@ -1,22 +1,21 @@
 <?php
-
 require_once $_SERVER['DOCUMENT_ROOT'] . '/src/core.php';
-session_start();
 
+session_start();
 $connect = new ConnectDB();
 $db = $connect->getConnection();
+
 $users = new Users($db);
+$messages = new Messages($db);
+$status = (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in']) ?? false;
 
 if (isset($_GET['logout']) && $_GET['logout']) {
-    $users->out();
+    $users->logOut();
 }
 
-if (isset($_POST['email'], $_POST['password'])) {
-    $users->authorize($_POST['email'], $_POST['password']);
+if ($status) {
+    $messagesCount = $messages->getCountMessages($_SESSION['id']);
 }
-
-$status = (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in']) ?? false;
-echo ($status) ? 'Авторизован' : 'Не авторизован';
 
 ?>
 
@@ -25,6 +24,7 @@ echo ($status) ? 'Авторизован' : 'Не авторизован';
 <head>
     <title>Мой сайт</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/post.css">
 </head>
 
 <body>

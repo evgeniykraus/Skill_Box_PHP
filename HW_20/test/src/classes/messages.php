@@ -11,67 +11,98 @@ class Messages
     }
 
 
-    public function getCats()
+    public function sendMessage($text, $title, $senderUserId, $recipientUserId, $categoryId) : bool
     {
-        $query = 'SELECT * FROM  categories';
+        $query = "INSERT INTO messages (text, title, created_at, sender_user_id, recipient_user_id)
+                  VALUES (?, ?, sysdate(), ?, ?)";
+        $stmt = $this->conn->prepare($query);
+
+        $stmt->bind_param("ssii", $text, $title, $senderUserId, $recipientUserId);
+        $stmt->execute();
+
+        return $this->seedCategoryMessage($stmt->insert_id, $categoryId);
+    }
+
+    private function seedCategoryMessage($messageId, $categoryId) : bool
+    {
+        $query = "INSERT INTO category_message (message_id, category_id)
+                  VALUES ($messageId, ?)";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $categoryId);
+        return $stmt->execute();
+    }
+
+    public function getCountMessages($recipientId)
+    {
+        $query = "SELECT count(m.id) AS id
+                  FROM $this->table m
+                           LEFT JOIN category_message cm ON m.id = cm.message_id
+                           LEFT JOIN categories c ON cm.category_id = c.id
+                           LEFT JOIN users u ON c.created_by = u.id
+                  WHERE m.read_mark = 0
+                    AND m.recipient_user_id = ?";
 
         $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $recipientId);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc()['id'];
+    }
+
+    public function getMessageById(int $messageId, int $recipientId)
+    {
+        $query = "SELECT m.title,
+                         m.created_at,
+                         m.text,
+                         concat(concat(concat(concat(users.name, ' '), users.patronymic), ' '), users.surname) AS sender,
+                         users.email
+                  FROM $this->table m
+                         LEFT JOIN users ON sender_user_id = users.id
+                  WHERE m.id = ? AND m.recipient_user_id =? ";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ii", $messageId, $recipientId);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $this->readMessage($messageId);
+        }
+
+        return $result->fetch_assoc();
+    }
+
+    private function readMessage($messageId): void
+    {
+        $query = "UPDATE $this->table 
+                  SET read_mark = 1
+                  WHERE id = ?";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $messageId);
+        $stmt->execute();
+    }
+
+    public function getAllUserMessages(int $recipientUserId, int $readMark)
+    {
+        $query = "SELECT m.*, c.title category_title, c.id category_id
+                  FROM $this->table m
+                    LEFT JOIN category_message cm ON m.id = cm.message_id
+                    LEFT JOIN categories c ON cm.category_id = c.id
+                  WHERE m.recipient_user_id = ?
+                    AND m.read_mark = ?";
+
+        $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("ii", $recipientUserId, $readMark);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-
-    //ПЕРЕДЕЛАТ!!!!!!!
-    public function print_categories_tree($tree, $level = 0)
-    {
-        if (!empty($tree)) {
-            echo '<ul>';
-            foreach ($tree as $category) {
-                echo '<li><a href="/categories/' . $category['id'] . '">' . str_repeat('-', $level) . $category['title'] . '</a>';
-                print_categories_tree($category['children'], $level + 1);
-                echo '</li>';
-            }
-            echo '</ul>';
-        }
-    }
-
-    //Вернет иерархический список категорий
     public function getAllCategories(): array
     {
-        $query = 'SELECT * FROM  categories';
+        $query = 'SELECT * FROM  categories
+                  WHERE categories.parent_id != 0';
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        $resultArray = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-
-        return $this->createTree($resultArray);
-    }
-
-    private function generateElementTree(&$treeElement, $parentsArr): void
-    {
-        foreach ($treeElement as $key => $item) {
-            if (!isset($item['children'])) {
-                $treeElement[$key]['children'] = array();
-            }
-            if (array_key_exists($key, $parentsArr)) {
-                $treeElement[$key]['children'] = $parentsArr[$key];
-                $this->generateElementTree($treeElement[$key]['children'], $parentsArr);
-            }
-        }
-    }
-
-
-    private function createTree(array $array): array
-    {
-        $parentsArr = array();
-
-        foreach ($array as $key => $item) {
-            $parentsArr[$item['parent_id']][$item['id']] = $item;
-        }
-
-        $treeElement = $parentsArr[0];
-        $this->generateElementTree($treeElement, $parentsArr);
-
-        return $treeElement;
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 }

@@ -3,23 +3,38 @@
 class Users
 {
     private $conn;
-    private string $table = 'USERS';
+    private string $table = 'users';
 
     public function __construct($db)
     {
         $this->conn = $db;
     }
 
-    public function usersList()
+    public function usersList($userId)
     {
-        $query = 'SELECT * FROM ' . $this->table . ' ORDER BY name';
+        $query = "SELECT users.id,
+       users.name,
+       phone
+       email,
+       surname,
+       password,
+       CASE
+           WHEN ('Пользователи с правом писать сообщения') in (select g.name from `groups` g
+                                        JOIN group_user gu ON g.id = gu.group_id
+                 WHERE gu.user_id = users.id) 
+               THEN 1
+           ELSE 0
+           END AS group_name
+FROM users
+WHERE EMAIL = ?";
 
         $stmt = $this->conn->prepare($query);
+        $stmt->bind_param("i", $userId);
         $stmt->execute();
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function authorize(string $email, string $password): void
+    public function authorize(string $email, string $password): bool
     {
         $query = "SELECT id, phone, name, surname, password FROM $this->table WHERE EMAIL = ?";
         $stmt = $this->conn->prepare($query);
@@ -34,16 +49,18 @@ class Users
                 $_SESSION['phone'] = $result['phone'];
                 $_SESSION['email'] = $email;
                 $_SESSION['name'] = $result['name'] . ' ' . $result['surname'];
+                return true;
             }
         }
+        return false;
     }
 
     public function getUserGroups(int $id): array
     {
-        $query = "select g.id, g.name, g.description from `groups` g
-                  left join group_user gu on g.id = gu.group_id
-                  left join users u on u.id = gu.user_id
-                  where u.id = ?";
+        $query = "SELECT g.id, g.name, g.description FROM `groups` g
+                    LEFT JOIN group_user gu ON g.id = gu.group_id
+                    LEFT JOIN users u on u.id = gu.user_id
+                  WHERE u.id = ?";
 
         $stmt = $this->conn->prepare($query);
         $stmt->bind_param("i", $id);
@@ -51,37 +68,10 @@ class Users
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getUserID(string $name): int
-    {
-        $query = "SELECT id FROM {$this->table} WHERE name = ?";
-
-        $stmt = $this->conn->prepare($query);
-        $stmt->bind_param("s", $name);
-
-        if ($this->catchError($stmt)) {
-
-            return $stmt->get_result()->fetch_assoc()['id'] ?? -1;
-        }
-
-        return -1;
-    }
-
-    public function out(): void
+    public function logOut(): void
     {
         session_unset();
         session_destroy();
     }
 
-    private function catchError($statement): bool
-    {
-        try {
-
-            return $statement->execute();
-
-        } catch (mysqli_sql_exception $e) {
-            var_dump("Ошибка: {$e->getMessage()}. Код ошибки: {$e->getCode()}");
-
-            return false;
-        }
-    }
 }

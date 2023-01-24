@@ -3,9 +3,7 @@
     <nav>
         <ul>
             <li><a href="/route/profile">Профиль</a></li>
-            <li><a href="/route/message">Сообщения</a></li>
-            <li><a href="/route/groups">Группы</a></li>
-            <li><a href="#">Настройки</a></li>
+            <li><a href="/route/post">Сообщения <?= ($messagesCount > 0) ? "($messagesCount)" : '' ?></a></li>
         </ul>
     </nav>
 </div>

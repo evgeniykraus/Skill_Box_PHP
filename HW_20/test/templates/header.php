@@ -7,6 +7,7 @@ $db = $connect->getConnection();
 
 $users = new Users($db);
 $messages = new Messages($db);
+
 $status = (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in']) ?? false;
 
 if (isset($_GET['logout']) && $_GET['logout']) {

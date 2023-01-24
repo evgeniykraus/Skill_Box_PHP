@@ -51,7 +51,7 @@ class Messages
     public function getMessageById(int $messageId, int $recipientId)
     {
         $query = "SELECT m.title,
-                         m.created_at,
+                         m.created_at + INTERVAL 4 HOUR AS created_at,
                          m.text,
                          concat(concat(concat(concat(users.name, ' '), users.patronymic), ' '), users.surname) AS sender,
                          users.email

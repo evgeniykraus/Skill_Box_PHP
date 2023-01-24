@@ -3,7 +3,6 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
 
 if (!$status) {
     header("Location: http://test/route/auth");
-    exit();
 }
 
 ?>

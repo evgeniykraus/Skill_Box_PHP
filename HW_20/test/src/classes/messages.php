@@ -66,12 +66,13 @@ class Messages
         return $stmt->get_result()->fetch_assoc()['id'];
     }
 
+
     /**
-     * @param int $messageId
+     * @param string $messageId
      * @param int $recipientId
-     * @return array
+     * @return mixed
      */
-    public function getMessageById(int $messageId, int $recipientId): array
+    public function getMessageById(string $messageId, int $recipientId): mixed
     {
         $query = "SELECT m.title,
                          m.created_at + INTERVAL 4 HOUR AS created_at,

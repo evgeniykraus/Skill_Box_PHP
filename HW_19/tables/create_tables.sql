@@ -56,7 +56,9 @@ create table messages
     sender_user_id    int          not null,
     recipient_user_id int          not null,
     read_mark         tinyint(1)   not null default 0,
-    primary key (id)
+    primary key (id),
+    foreign key (sender_user_id) references users (id),
+    foreign key (recipient_user_id) references users (id)
 );
 
 -- создание таблицы 'category_message'

@@ -1,7 +1,7 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
 
-if (!$status) {
+if (!$isActive) {
     header("Location: http://test/");
 }
 

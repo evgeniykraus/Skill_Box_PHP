@@ -21,7 +21,7 @@ class Users
                     LEFT JOIN group_user gu ON u.id = gu.user_id
                     LEFT JOIN `groups` g ON g.id = gu.group_id
                   WHERE u.id != ?
-                    AND g.name = 'Пользователи с правом писать сообщения'
+                    AND g.id = 2
                   ORDER BY u.name";
 
         $stmt = $this->conn->prepare($query);
@@ -39,7 +39,7 @@ class Users
     {
         $query = "SELECT users.id, users.name, phone, surname, password,
                          CASE
-                             WHEN ('Пользователи с правом писать сообщения') in (select g.name from `groups` g
+                             WHEN (2) in (select g.id from `groups` g
                                                           JOIN group_user gu ON g.id = gu.group_id
                                    WHERE gu.user_id = users.id) 
                                  THEN 1

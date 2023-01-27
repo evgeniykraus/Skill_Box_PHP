@@ -8,13 +8,13 @@ $db = $connect->getConnection();
 $users = new Users($db);
 $messages = new Messages($db);
 
-$status = (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in']) ?? false;
+$isActive = (isset($_SESSION['is_logged_in']) && $_SESSION['is_logged_in']) ?? false;
 
 if (isset($_GET['logout']) && $_GET['logout']) {
     $users->logOut();
 }
 
-if ($status) {
+if ($isActive) {
     $messagesCount = $messages->getCountMessages($_SESSION['id'] ?? 0);
 }
 
@@ -40,7 +40,7 @@ if ($status) {
         </ul>
     </nav>
     <div class="right-corner">
-        <?php if ($status) { ?>
+        <?php if ($isActive) { ?>
             <a href="/route/auth/?logout=true">Выход</a>
         <?php } else { ?>
             <a href="#">Регистрация</a>
@@ -49,6 +49,6 @@ if ($status) {
     </div>
 </header>
 
-<?php if ($status) {
+<?php if ($isActive) {
     require_once 'sidebar.php';
 } ?>

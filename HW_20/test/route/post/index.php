@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT'] . '/templates/header.php';
-if (!isset($_SESSION['can_write']) || !$status) {
+if (!isset($_SESSION['can_write']) || !$isActive) {
     header("Location: http://test/route/auth");
     exit();
 }

@@ -66,11 +66,10 @@ class Messages
         return $stmt->get_result()->fetch_assoc()['id'];
     }
 
-
     /**
-     * @param string $messageId
+     * @param int $messageId
      * @param int $recipientId
-     * @return mixed
+     * @return array
      */
     public function getMessageById(string $messageId, int $recipientId): mixed
     {
@@ -134,8 +133,7 @@ class Messages
      */
     public function getAllCategories(): array
     {
-        $query = 'SELECT * FROM  categories
-                  WHERE categories.parent_id != 0';
+        $query = 'SELECT * FROM  categories';
 
         $stmt = $this->conn->prepare($query);
         $stmt->execute();

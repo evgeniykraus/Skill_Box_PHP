@@ -3,11 +3,9 @@
         <select name="recipient" class="message-form__select">
             <option value="0">Выберите получателя</option>
             <?php
-
-            foreach ($users->usersList() as $user) {
-                if ($user['id'] != $_SESSION['id']) { ?>
-                    <option value="<?= $user['id'] ?>"> <?= $user['name'] . ' ' . $user['surname'] ?> </option>
-                <?php }
+            foreach ($users->usersList($_SESSION['id']) as $user) { ?>
+                <option value="<?= $user['id'] ?>"> <?= $user['name'] . ' ' . $user['surname'] ?> </option>
+                <?php
             }
             ?>
         </select>
